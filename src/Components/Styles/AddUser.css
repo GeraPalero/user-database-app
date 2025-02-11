@@ -1,0 +1,41 @@
+.add-user {
+  display: flex;
+  justify-content: center;
+  padding-top: 3rem;
+}
+
+.form-title {
+  margin: 0;
+}
+
+.add-user_form {
+  display: flex;
+  flex-flow: column;
+  width: 300px;
+  border: 2px solid gray;
+  background-color: #181818;
+  border-radius: 20px;
+  padding: 1rem;
+}
+
+.input {
+  margin-bottom: 0.5rem;
+}
+
+.input-label {
+  margin-right: auto;
+  font-weight: bold;
+  /* margin-bottom: 0.5rem; */
+}
+
+.file-input-container {
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 0.5rem;
+  background-color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.submit-button {
+  background-color: #333;
+}
