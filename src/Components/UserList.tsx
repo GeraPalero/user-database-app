@@ -25,7 +25,7 @@ const UserList = () => {
 
   return (
     <>
-      <h2>View users :D</h2>
+      <h2>View users</h2>
       <div className="user-list">
         <div className="user-scroll">{users.length > 0 ? users.map((user) => <FullUser key={user.id} user={user} />) : <div>No users to display</div>}</div>
       </div>
