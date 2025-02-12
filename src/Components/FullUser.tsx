@@ -1,3 +1,4 @@
+import ClipboardButton from "./ClipboardButton";
 import "./Styles/FullUser.css";
 
 type FullUserProps = {
@@ -21,38 +22,17 @@ const FullUser = ({ user }: FullUserProps) => {
           <label className="label">Full name</label>
           <div className="user-info">
             <div>{fullUserName}</div>
-            <button
-              className="clipboard-button"
-              onClick={() => {
-                navigator.clipboard.writeText(`${fullUserName}`);
-              }}
-            >
-              🗐
-            </button>
+            <ClipboardButton textToCopy={fullUserName} />
           </div>
           <label className="label">Email adress</label>
           <div className="user-info">
             <div>{user.email}</div>
-            <button
-              className="clipboard-button"
-              onClick={() => {
-                navigator.clipboard.writeText(`${user.email}`);
-              }}
-            >
-              🗐
-            </button>
+            <ClipboardButton textToCopy={user.email} />
           </div>
           <label className="label"> Phone number</label>
           <div className="user-info">
             <div>{user.phoneNumber}</div>
-            <button
-              className="clipboard-button"
-              onClick={() => {
-                navigator.clipboard.writeText(`${user.phoneNumber}`);
-              }}
-            >
-              🗐
-            </button>
+            <ClipboardButton textToCopy={user.phoneNumber} />
           </div>
         </div>
       </div>

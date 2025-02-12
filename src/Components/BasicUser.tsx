@@ -30,26 +30,10 @@ const BasicUser = ({ user, setUpdateUser }: BasicUserProps) => {
           <label className="label">Full name</label>
           <div className="user-info">
             <div>{fullUserName}</div>
-            <button
-              className="clipboard-button"
-              onClick={() => {
-                navigator.clipboard.writeText(`${fullUserName}`);
-              }}
-            >
-              🗐
-            </button>
           </div>
           <label className="label">Email adress</label>
           <div className="user-info">
             <div>{user.email}</div>
-            <button
-              className="clipboard-button"
-              onClick={() => {
-                navigator.clipboard.writeText(`${user.email}`);
-              }}
-            >
-              🗐
-            </button>
           </div>
           <button className="delete-user-button" onClick={() => deleteUserHandler(user.id)}>
             Delete User
