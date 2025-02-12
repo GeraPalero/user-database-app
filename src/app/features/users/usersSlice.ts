@@ -81,7 +81,7 @@ export const deleteUser = createAsyncThunk<PostResponse, number, { rejectValue: 
   }
 });
 
-const userslice = createSlice({
+const usersSlice = createSlice({
   name: "users",
   initialState,
   reducers: {
@@ -132,4 +132,4 @@ const userslice = createSlice({
   },
 });
 
-export const usersReducer = userslice.reducer;
+export const usersReducer = usersSlice.reducer;

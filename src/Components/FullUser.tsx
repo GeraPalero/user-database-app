@@ -24,11 +24,13 @@ const FullUser = ({ user }: FullUserProps) => {
             <div>{fullUserName}</div>
             <ClipboardButton textToCopy={fullUserName} />
           </div>
+
           <label className="label">Email adress</label>
           <div className="user-info">
             <div>{user.email}</div>
             <ClipboardButton textToCopy={user.email} />
           </div>
+
           <label className="label"> Phone number</label>
           <div className="user-info">
             <div>{user.phoneNumber}</div>

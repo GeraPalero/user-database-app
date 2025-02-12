@@ -120,10 +120,6 @@ const AddUser = () => {
     }
   };
 
-  // const deleteUserThree = async () => {
-  //   await axios.delete(`http://localhost:5000/api/users/3`);
-  // };
-
   return (
     <>
       <h2>Add user</h2>
@@ -148,7 +144,6 @@ const AddUser = () => {
           </form>
         </div>
         {formError && formError.map((errorMessage) => <div key={errorMessage}>{errorMessage}</div>)}
-        {/* <button onClick={deleteUserThree}>DEelete 3</button> */}
       </div>
     </>
   );
