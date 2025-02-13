@@ -1,0 +1,33 @@
+.toast-notification {
+  width: 200px;
+  height: 50px;
+  background-color: rgb(64, 88, 88);
+  color: whitesmoke;
+  margin-bottom: 15px;
+  animation: pop-in 0.2s forwards;
+  transition: all 1s;
+  border-radius: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  /*Display options*/
+  display: flex;
+  align-items: center;
+}
+
+.toast-cancel_button {
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  padding: 0;
+}
+
+@keyframes pop-in {
+  0% {
+    transform: scale(50%);
+  }
+
+  100% {
+    transform: scale(100%);
+  }
+}

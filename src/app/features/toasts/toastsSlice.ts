@@ -27,11 +27,11 @@ const toastsSlice = createSlice({
       state.quantity += 1;
     },
     removeToast: (state, action: PayloadAction<number>) => {
-      state.queue.filter((toast) => toast.id != action.payload);
+      state.queue = state.queue.filter((toast) => toast.id != action.payload);
       state.quantity -= 1;
     },
     setTimeOutID: (state, action: PayloadAction<{ id: number; timeOutId: number }>) => {
-      state.queue.map((toast) => {
+      state.queue = state.queue.map((toast) => {
         if (toast.id === action.payload.id) {
           return {
             ...toast,

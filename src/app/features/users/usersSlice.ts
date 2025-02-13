@@ -24,7 +24,7 @@ type FormData = {
 };
 
 export type PostResponse = {
-  status: 0 | 1;
+  status: "successfull" | "error";
   message: string;
 };
 
@@ -51,13 +51,13 @@ export const postUser = createAsyncThunk<PostResponse, FormData, { rejectValue: 
     const response = await axios.post("http://localhost:5000/api/users", formData);
     // return response.data;
     return {
-      status: 1,
+      status: "successfull",
       message: "User created successfully",
     };
   } catch (error) {
     console.error("Error posting user:", error);
     return {
-      status: 0,
+      status: "error",
       message: "Error creating user",
     };
   }
@@ -69,13 +69,13 @@ export const deleteUser = createAsyncThunk<PostResponse, number, { rejectValue: 
     const response = await axios.delete(`http://localhost:5000/api/users/${id}`);
     // return response.data;
     return {
-      status: 1,
+      status: "successfull",
       message: "User deleted successfully",
     };
   } catch (error) {
     console.error("Error posting user:", error);
     return {
-      status: 0,
+      status: "error",
       message: "Error deleting user",
     };
   }

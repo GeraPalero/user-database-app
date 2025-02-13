@@ -1,0 +1,8 @@
+.toasts-display {
+  position: absolute;
+  transform-origin: top right;
+  top: 10px;
+  right: 10px;
+  /* background-color: aqua; */
+  z-index: 1;
+}

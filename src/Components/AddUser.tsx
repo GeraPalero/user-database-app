@@ -5,6 +5,8 @@ import { postUser } from "../app/features/users/usersSlice";
 import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
 import { PostResponse } from "../app/features/users/usersSlice";
+import { toastsActions } from "../app/features/toasts/toastsSlice";
+import { Toast } from "../app/features/toasts/toastsSlice";
 
 const initialState = {
   firstName: "",
@@ -21,9 +23,25 @@ const AddUser = () => {
   // const { loading, error } = useSelector((state: RootState) => state.users);
   const [serverResponse, setServerResponse] = useState<PostResponse | undefined>(undefined);
 
+  type ToastType = "successfull" | "error" | "warning";
+
+  const createToast = (tType: ToastType, tMessage: string, tDuration = 3000) => {
+    const newToast: Toast = {
+      id: Date.now(),
+      type: tType,
+      message: tMessage,
+      duration: tDuration,
+      timeOutId: null,
+    };
+
+    dispatch(toastsActions.addToast(newToast));
+  };
+
   useEffect(() => {
     if (serverResponse) {
-      window.alert(serverResponse.message);
+      const { status, message } = serverResponse;
+      createToast(status, message);
+      //window.alert(serverResponse.message);
     }
   }, [serverResponse]);
 
@@ -112,7 +130,7 @@ const AddUser = () => {
       console.log(result.payload);
 
       if (result.payload) {
-        if (result.payload.status === 1) {
+        if (result.payload.status === "successfull") {
           setFormData(initialState);
         }
         setServerResponse(result.payload);
