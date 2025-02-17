@@ -96,10 +96,12 @@ const usersSlice = createSlice({
     //Fetching users
     builder.addCase(fetchUsers.pending, (state) => {
       state.loading = true;
+      state.error = "";
     });
     builder.addCase(fetchUsers.fulfilled, (state, action) => {
       state.users = action.payload;
       state.loading = false;
+      state.error = "";
     });
     builder.addCase(fetchUsers.rejected, (state, action) => {
       state.error = action.payload || "Something went wrong"; //This operator is used when action.payload could be undefined
@@ -109,9 +111,11 @@ const usersSlice = createSlice({
     //Creating a user
     builder.addCase(postUser.pending, (state) => {
       state.loading = true;
+      state.error = "";
     });
     builder.addCase(postUser.fulfilled, (state) => {
       state.loading = false;
+      state.error = "";
     });
     builder.addCase(postUser.rejected, (state, action) => {
       state.error = action.payload?.message || "Something went wrong"; //This operator is used when action.payload could be undefined
@@ -121,9 +125,11 @@ const usersSlice = createSlice({
     //Deleting a user
     builder.addCase(deleteUser.pending, (state) => {
       state.loading = true;
+      state.error = "";
     });
     builder.addCase(deleteUser.fulfilled, (state) => {
       state.loading = false;
+      state.error = "";
     });
     builder.addCase(deleteUser.rejected, (state, action) => {
       state.error = action.payload?.message || "Something went wrong"; //This operator is used when action.payload could be undefined

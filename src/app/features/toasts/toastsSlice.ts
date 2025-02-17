@@ -8,6 +8,12 @@ export type Toast = {
   timeOutId: number | null;
 };
 
+export type ToastPayload = {
+  type: "successfull" | "error" | "warning";
+  message: string;
+  duration: number;
+};
+
 type ToastsState = {
   queue: Toast[];
   quantity: number;
@@ -22,8 +28,13 @@ const toastsSlice = createSlice({
   name: "toasts",
   initialState,
   reducers: {
-    addToast: (state, action: PayloadAction<Toast>) => {
-      state.queue.push(action.payload);
+    addToast: (state, action: PayloadAction<ToastPayload>) => {
+      const newToast: Toast = {
+        ...action.payload,
+        id: Date.now(),
+        timeOutId: null,
+      };
+      state.queue.push(newToast);
       state.quantity += 1;
     },
     removeToast: (state, action: PayloadAction<number>) => {
@@ -36,6 +47,18 @@ const toastsSlice = createSlice({
           return {
             ...toast,
             timeOutId: action.payload.timeOutId,
+          };
+        } else {
+          return toast;
+        }
+      });
+    },
+    removeTimeOutID: (state, action: PayloadAction<number>) => {
+      state.queue = state.queue.map((toast) => {
+        if (toast.id === action.payload) {
+          return {
+            ...toast,
+            timeOutId: null,
           };
         } else {
           return toast;
