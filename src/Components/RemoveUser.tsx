@@ -5,15 +5,28 @@ import { useAppDispatch } from "../app/hooks";
 import { fetchUsers } from "../app/features/users/usersSlice";
 import { useSelector } from "react-redux";
 import BasicUser from "./BasicUser";
+import { ToastPayload, toastsActions } from "../app/features/toasts/toastsSlice";
 
 const RemoveUser = () => {
-  const { users } = useSelector((state: RootState) => state.users);
+  const { error, users } = useSelector((state: RootState) => state.users);
   const [updateUsers, setUpdateUsers] = useState(true);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchUsers());
   }, [updateUsers]);
+
+  useEffect(() => {
+    if (error) {
+      const newToast: ToastPayload = {
+        type: "error",
+        message: "Error fetching users",
+        duration: 5000,
+      };
+
+      dispatch(toastsActions.addToast(newToast));
+    }
+  }, [error]);
 
   return (
     <>

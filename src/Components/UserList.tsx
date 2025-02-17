@@ -5,6 +5,7 @@ import "./Styles/UserList.css";
 import { useAppDispatch } from "../app/hooks";
 import { fetchUsers } from "../app/features/users/usersSlice";
 import { useSelector } from "react-redux";
+import { ToastPayload, toastsActions } from "../app/features/toasts/toastsSlice";
 
 const UserList = () => {
   const { loading, error, users } = useSelector((state: RootState) => state.users);
@@ -13,6 +14,18 @@ const UserList = () => {
   useEffect(() => {
     dispatch(fetchUsers());
   }, []);
+
+  useEffect(() => {
+    if (error) {
+      const newToast: ToastPayload = {
+        type: "error",
+        message: "Error fetching users",
+        duration: 5000,
+      };
+
+      dispatch(toastsActions.addToast(newToast));
+    }
+  }, [error]);
 
   return (
     <>
