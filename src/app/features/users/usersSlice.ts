@@ -35,18 +35,18 @@ const initialState: UserState = {
 };
 
 //Return type, the parameter received type and the rejected action type
-export const fetchUsers = createAsyncThunk<User[], void, { rejectValue: string }>("users/fetchUsers", async () => {
+export const fetchUsers = createAsyncThunk<User[], void, { rejectValue: string }>("users/fetchUsers", async (_, { rejectWithValue }) => {
   try {
     const response = await axios.get("http://localhost:5000/api/users");
     return response.data;
   } catch (error) {
     console.error("Error fetching users:", error);
-    return "Error fetching users";
+    return rejectWithValue("Error fetching users");
   }
 });
 
 //Return type, the parameter received type and the rejected action type
-export const postUser = createAsyncThunk<PostResponse, FormData, { rejectValue: PostResponse }>("users/postUser", async (formData) => {
+export const postUser = createAsyncThunk<PostResponse, FormData, { rejectValue: PostResponse }>("users/postUser", async (formData, { rejectWithValue }) => {
   try {
     const response = await axios.post("http://localhost:5000/api/users", formData);
     // return response.data;
@@ -56,15 +56,15 @@ export const postUser = createAsyncThunk<PostResponse, FormData, { rejectValue: 
     };
   } catch (error) {
     console.error("Error posting user:", error);
-    return {
+    return rejectWithValue({
       status: "error",
       message: "Error creating user",
-    };
+    });
   }
 });
 
 //Return type, the parameter received type and the rejected action type
-export const deleteUser = createAsyncThunk<PostResponse, number, { rejectValue: PostResponse }>("users/deleteUser", async (id) => {
+export const deleteUser = createAsyncThunk<PostResponse, number, { rejectValue: PostResponse }>("users/deleteUser", async (id, { rejectWithValue }) => {
   try {
     const response = await axios.delete(`http://localhost:5000/api/users/${id}`);
     // return response.data;
@@ -74,10 +74,10 @@ export const deleteUser = createAsyncThunk<PostResponse, number, { rejectValue: 
     };
   } catch (error) {
     console.error("Error posting user:", error);
-    return {
+    return rejectWithValue({
       status: "error",
       message: "Error deleting user",
-    };
+    });
   }
 });
 
