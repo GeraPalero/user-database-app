@@ -13,20 +13,21 @@ const RemoveUser = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchUsers());
+    const useEffectFetching = async () => {
+      const response = await dispatch(fetchUsers());
+      if (response.payload === "Error fetching users") {
+        const newToast: ToastPayload = {
+          type: "error",
+          message: "Error fetching users",
+          duration: 5000,
+        };
+
+        dispatch(toastsActions.addToast(newToast));
+      }
+    };
+
+    useEffectFetching();
   }, [updateUsers]);
-
-  useEffect(() => {
-    if (error) {
-      const newToast: ToastPayload = {
-        type: "error",
-        message: "Error fetching users",
-        duration: 5000,
-      };
-
-      dispatch(toastsActions.addToast(newToast));
-    }
-  }, [error]);
 
   return (
     <>
