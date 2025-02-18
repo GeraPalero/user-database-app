@@ -4,7 +4,7 @@ import { toastsActions } from "../app/features/toasts/toastsSlice";
 import { useEffect, useState } from "react";
 import "./Styles/ToastNotification.css";
 import greenCheck from "../assets/green_checkmark.png";
-import errorCross from "../assets/error_mark.webp";
+import errorCross from "../assets/error_mark.png";
 import warningSign from "../assets/warning_sign.webp";
 
 const { removeToast, setTimeOutID } = toastsActions;

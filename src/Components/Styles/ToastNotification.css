@@ -11,8 +11,9 @@
   padding-right: 10px;
 
   /*Display options*/
-  display: flex;
+  display: grid;
   align-items: center;
+  grid-template-columns: 1fr 5fr 1fr;
 }
 
 .toast-cancel_button {
