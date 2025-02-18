@@ -41,7 +41,6 @@ const AddUser = () => {
     if (serverResponse) {
       const { status, message } = serverResponse;
       createToast(status, message);
-      //window.alert(serverResponse.message);
     }
   }, [serverResponse]);
 

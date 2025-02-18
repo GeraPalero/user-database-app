@@ -1,6 +1,8 @@
 import { useAppDispatch } from "../app/hooks";
 import "./Styles/FullUser.css";
-import { deleteUser } from "../app/features/users/usersSlice";
+import { deleteUser, PostResponse } from "../app/features/users/usersSlice";
+import { useEffect, useState } from "react";
+import { Toast, toastsActions } from "../app/features/toasts/toastsSlice";
 
 type BasicUserProps = {
   user: {
@@ -16,9 +18,32 @@ type BasicUserProps = {
 const BasicUser = ({ user, setUpdateUser }: BasicUserProps) => {
   const fullUserName = user.firstName + " " + user.lastName;
   const dispatch = useAppDispatch();
+  const [serverResponse, setServerResponse] = useState<PostResponse | undefined>(undefined);
 
-  const deleteUserHandler = (userID: number) => {
-    dispatch(deleteUser(userID));
+  type ToastType = "successfull" | "error" | "warning";
+
+  const createToast = (tType: ToastType, tMessage: string, tDuration = 3000) => {
+    const newToast: Toast = {
+      id: Date.now(),
+      type: tType,
+      message: tMessage,
+      duration: tDuration,
+      timeOutId: null,
+    };
+
+    dispatch(toastsActions.addToast(newToast));
+  };
+
+  useEffect(() => {
+    if (serverResponse) {
+      const { status, message } = serverResponse;
+      createToast(status, message);
+    }
+  }, [serverResponse]);
+
+  const deleteUserHandler = async (userID: number) => {
+    const response = await dispatch(deleteUser(userID));
+    setServerResponse(response.payload);
     setUpdateUser((prev) => !prev);
   };
 
