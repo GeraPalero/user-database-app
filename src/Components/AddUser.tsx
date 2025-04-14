@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import "./Styles/AddUser.css";
 import { useAppDispatch } from "../app/hooks";
 import { postUser } from "../app/features/users/usersSlice";
-import { useSelector } from "react-redux";
-import { RootState } from "../app/store";
+
 import { PostResponse } from "../app/features/users/usersSlice";
 import { toastsActions } from "../app/features/toasts/toastsSlice";
 import { Toast } from "../app/features/toasts/toastsSlice";
@@ -13,14 +12,13 @@ const initialState = {
   lastName: "",
   email: "",
   phoneNumber: "",
-  profilePic: "", // This will store the Base64 string for the image
+  profilePic: "", // This will store the Base64 string for the image, or maybe dont
 };
 
 const AddUser = () => {
   const [formError, setFormError] = useState<string[]>([]);
   const [formData, setFormData] = useState(initialState);
   const dispatch = useAppDispatch();
-  // const { loading, error } = useSelector((state: RootState) => state.users);
   const [serverResponse, setServerResponse] = useState<PostResponse | undefined>(undefined);
 
   type ToastType = "successfull" | "error" | "warning";
