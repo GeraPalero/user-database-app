@@ -8,7 +8,7 @@ import { toastsActions } from "../app/features/toasts/toastsSlice";
 import { Toast } from "../app/features/toasts/toastsSlice";
 
 const initialState = {
-  firstName: "",
+  firstName: "", // this is a nonsense comment
   lastName: "",
   email: "",
   phoneNumber: "",
